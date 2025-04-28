@@ -107,7 +107,7 @@ class BerlinovoTracker:
                 
                 new_listings = self.find_new_listings(current_listings, previous_listings)
                 
-                filtered_listings = [listing for listing in new_listings if "Christoph" in listing['address']]
+                filtered_listings = [listing for listing in new_listings if "Fischerinsel" in listing['address']]
 
                 if filtered_listings:
                     print(f"\nFound {len(filtered_listings)} new listings!")
