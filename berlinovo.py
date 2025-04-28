@@ -5,28 +5,19 @@ from datetime import datetime
 import os
 import time
 from typing import Dict, List
-import subprocess
 
 class BerlinovoTracker:
     def send_notification(self, title, message):
-        # os.system(f"""
-        #     osascript -e 'display notification "{message}" with title "{title}"'
-        # """)
-        # Notification(
-        #     title=title,
-        #     description=message,
-        #     duration=10,  # seconds
-        #     urgency='normal'
-        # ).send()
-        # notify2.init('Berlinovo Tracker')
-        # notify2.Notification(title, message).show()
-        # subprocess.run(['terminal-notifier', '-title', title, '-message', message])
-        # subprocess.run([
-        #     'osascript', 
-        #     '-e', 
-        #     f'display notification "{title}" with title "{message}"'
-        # ])
         print(f"Sending notification: {title} - {message}")
+        bot_token = os.environ.get("TELEGRAM_BERLINOVO_BOT_TOKEN")
+        chat_id = os.environ.get("TELEGRAM_BERLINOVO_CHAT_ID")
+        if bot_token and chat_id:
+            url = f"https://api.telegram.org/bot{bot_token}/sendMessage"
+            data = {"chat_id": chat_id, "text": f"{title}\n{message}"}
+            requests.post(url, data=data)
+            print("Telegram notification sent successfully.")
+        else:
+            print("Telegram credentials not set. Notification not sent.")
 
     def __init__(self):
         self.base_url = "https://www.berlinovo.de"
@@ -116,7 +107,7 @@ class BerlinovoTracker:
                 
                 new_listings = self.find_new_listings(current_listings, previous_listings)
                 
-                filtered_listings = [listing for listing in new_listings if "Fischerinsel" in listing['address']]
+                filtered_listings = [listing for listing in new_listings if "Christoph" in listing['address']]
 
                 if filtered_listings:
                     print(f"\nFound {len(filtered_listings)} new listings!")
