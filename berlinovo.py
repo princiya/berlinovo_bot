@@ -20,12 +20,12 @@ class BerlinovoTracker:
         # ).send()
         # notify2.init('Berlinovo Tracker')
         # notify2.Notification(title, message).show()
-        subprocess.run(['terminal-notifier', '-title', title, '-message', message])
-        subprocess.run([
-            'osascript', 
-            '-e', 
-            f'display notification "{title}" with title "{message}"'
-        ])
+        # subprocess.run(['terminal-notifier', '-title', title, '-message', message])
+        # subprocess.run([
+        #     'osascript', 
+        #     '-e', 
+        #     f'display notification "{title}" with title "{message}"'
+        # ])
         print(f"Sending notification: {title} - {message}")
 
     def __init__(self):
